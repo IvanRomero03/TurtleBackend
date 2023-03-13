@@ -1,8 +1,14 @@
 {
   "routes": [
     {
-      "src": "/api/(.*)",
+      "src": ["/api/(.*)", "/(.*)"],
       "dest": "api/index.py"
+    }
+  ],
+  "builds": [
+    {
+      "src": "api/index.py",
+      "use": "@now/python"
     }
   ]
 }
