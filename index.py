@@ -24,9 +24,9 @@ class handler(BaseHTTPRequestHandler):
         return
     
 
-if __name__ == '__main__':
-    from http.server import HTTPServer
-    server = HTTPServer(('localhost', 8080), handler)
-    print('Starting server, use <Ctrl-C> to stop')
-    server.serve_forever()
+# if __name__ == '__main__':
+#     from http.server import HTTPServer
+#     server = HTTPServer(('localhost', 8080), handler)
+#     print('Starting server, use <Ctrl-C> to stop')
+#     server.serve_forever()
 
