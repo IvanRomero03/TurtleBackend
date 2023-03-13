@@ -8,7 +8,7 @@
   "builds": [
     {
       "src": "api/index.py",
-      "use": "@now/python"
+      "use": "@vercel/python"
     }
   ]
 }
