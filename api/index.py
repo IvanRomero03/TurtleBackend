@@ -1,8 +1,8 @@
 from http.server import BaseHTTPRequestHandler
-from urllib import parse
+#from urllib import parse
 import json
 from Parser import Parser
-from RedisDB import RedisDB
+#from RedisDB import RedisDB
 
 class handler(BaseHTTPRequestHandler):
     def do_POST(self):
