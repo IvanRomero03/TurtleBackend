@@ -1,7 +1,7 @@
 from http.server import BaseHTTPRequestHandler
 #from urllib import parse
 import json
-from Parser import Parser
+from src import Parser
 #from RedisDB import RedisDB
 
 class handler(BaseHTTPRequestHandler):
