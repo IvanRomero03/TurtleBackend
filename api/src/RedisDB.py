@@ -43,16 +43,16 @@ class RedisDB:
         return json.dumps(self.get_all())
     
     
-if __name__ == "__main__":
-    dotenv.load_dotenv()
-    host = os.getenv("REDIS_HOST")
-    port = os.getenv("REDIS_PORT")
-    db = os.getenv("REDIS_DB")
-    username = os.getenv("REDIS_USERNAME")
-    password = os.getenv("REDIS_PASSWORD")
-    redisDB = RedisDB(host, port, db, username, password)
-    redisDB.set("test", "test")
-    print(redisDB.keys())
-    print(redisDB.get("test"))
-    print(redisDB.get_all_json())
-    pass
+# if __name__ == "__main__":
+#     dotenv.load_dotenv()
+#     host = os.getenv("REDIS_HOST")
+#     port = os.getenv("REDIS_PORT")
+#     db = os.getenv("REDIS_DB")
+#     username = os.getenv("REDIS_USERNAME")
+#     password = os.getenv("REDIS_PASSWORD")
+#     redisDB = RedisDB(host, port, db, username, password)
+#     redisDB.set("test", "test")
+#     print(redisDB.keys())
+#     print(redisDB.get("test"))
+#     print(redisDB.get_all_json())
+#     pass
