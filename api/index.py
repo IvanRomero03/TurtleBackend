@@ -15,7 +15,8 @@ load_dotenv()
 class handler(handlerBase):
     def do_GET(self):
         # check if redis has a ConnectionPool attribute
-        print(hasattr(redis,"ConnectionPool"))
+        if not hasattr(self, 'redis'):
+            self.redis = redis.Redis(host=os.getenv("REDIS_HOST"), port=os.getenv("REDIS_PORT"), db=os.getenv("REDIS_DB"), username=os.getenv("REDIS_USERNAME"), password=os.getenv("REDIS_PASSWORD"))
         response = 200
         self.send_response(response)
         self.send_header('Content-type','text/html')
@@ -23,9 +24,8 @@ class handler(handlerBase):
         self.wfile.write(bytes("Hello World !", "utf8"))
         return
     def do_POST(self):
-        # if not hasattr(self, 'redis'):
-        #     self.redis = RedisDB(os.getenv("REDIS_HOST"), os.getenv("REDIS_PORT"), os.getenv("REDIS_DB"), os.getenv("REDIS_USERNAME"), os.getenv("REDIS_PASSWORD"))
-
+        if not hasattr(self, 'redis'):
+            self.redis = redis.Redis(host=os.getenv("REDIS_HOST"), port=os.getenv("REDIS_PORT"), db=os.getenv("REDIS_DB"), username=os.getenv("REDIS_USERNAME"), password=os.getenv("REDIS_PASSWORD"))
         s = self.path
         text = self.rfile.read(int(self.headers['Content-Length'])).decode("utf-8")
         text = json.loads(text)
