@@ -5,6 +5,12 @@ import os
 from .src.handlerBase import handlerBase 
 from .src.util import randomHash
 #from .src.RedisDB import RedisDB
+import redis
+from dotenv import load_dotenv
+
+load_dotenv()
+
+redis_db = redis.Redis(host=os.getenv("REDIS_HOST"), port=os.getenv("REDIS_PORT"), db=os.getenv("REDIS_DB"), username=os.getenv("REDIS_USERNAME"), password=os.getenv("REDIS_PASSWORD"))
 
 class handler(handlerBase):
     def do_GET(self):
@@ -15,6 +21,7 @@ class handler(handlerBase):
         self.wfile.write(bytes("Hello World !", "utf8"))
         return
     def do_POST(self):
+        global redis_db
         s = self.path
         # Content-Type: application/json
         # {"text": "fd 100"}
@@ -27,7 +34,7 @@ class handler(handlerBase):
         # pass the result to the redis db 
         # create a random hash
         hash = randomHash(16)
-        self.redis.set(hash, str(result))
+        redis_db.set(hash, str(result))
         svg = parser.getSVG()
 
         response = 200
