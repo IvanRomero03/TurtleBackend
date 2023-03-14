@@ -58,7 +58,7 @@ class handler(handlerBase):
         response = 200
         self.send_response(response)
         self.send_header('Content-type','application/json')
-        #self.send_header('Access-Control-Allow-Origin', '*')
+        # self.send_header('Access-Control-Allow-Origin', '*')
         self.end_headers()
         jsonResponse = json.dumps({"hash": hash, "svg": svg})
         self.wfile.write(bytes(jsonResponse, "utf-8"))
