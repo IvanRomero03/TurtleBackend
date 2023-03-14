@@ -4,8 +4,8 @@ from .src.Parser import Parser
 import os
 from .src.handlerBase import handlerBase 
 from .src.util import randomHash
-from .src.RedisDB import RedisDB
-#import redis
+#from .src.RedisDB import RedisDB
+import redis
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -14,6 +14,8 @@ load_dotenv()
 
 class handler(handlerBase):
     def do_GET(self):
+        # check if redis has a ConnectionPool attribute
+        print(redis.hasattr("ConnectionPool"))
         response = 200
         self.send_response(response)
         self.send_header('Content-type','text/html')
