@@ -23,6 +23,7 @@ class handler(BaseHTTPRequestHandler):
         result = parser.parse(textInput)
         parser.execute()
         print(os.getcwd())
+        # print tree
         #create empty file
         #open("/temp/temp.svg", "w").close()
         parser.save("temp/temp.svg")
