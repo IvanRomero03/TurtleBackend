@@ -49,7 +49,9 @@ class handler(BaseHTTPRequestHandler):
         response = 200
         self.send_response(response, "OK")
         #self.send_header('Content-type','application/json')
-        #self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Headers', '*')
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
         self.end_headers()
         jsonResponse = json.dumps({"hash": hash, "svg": svg})
         self.wfile.write(bytes(jsonResponse, "utf-8"))
