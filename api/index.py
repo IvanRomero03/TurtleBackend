@@ -20,6 +20,7 @@ class handler(handlerBase):
         response = 200
         self.send_response(response)
         self.send_header('Content-type','text/html')
+        self.send_header('Access-Control-Allow-Origin', '*')
         self.end_headers()
         self.wfile.write(bytes("Hello World !", "utf8"))
         return
@@ -50,6 +51,7 @@ class handler(handlerBase):
         response = 200
         self.send_response(response)
         self.send_header('Content-type','application/json')
+        self.send_header('Access-Control-Allow-Origin', '*')
         self.end_headers()
         jsonResponse = json.dumps({"hash": hash, "svg": svg})
         self.wfile.write(bytes(jsonResponse, "utf-8"))
