@@ -1,9 +1,9 @@
 from http.server import BaseHTTPRequestHandler
 import json
-from .src.Parser import Parser
+from src.Parser import Parser
 import os
-from .src.handlerBase import handlerBase 
-from .src.util import randomHash
+from src.handlerBase import handlerBase 
+from src.util import randomHash
 #from .src.RedisDB import RedisDB
 import redis
 from dotenv import load_dotenv
@@ -46,10 +46,10 @@ class handler(BaseHTTPRequestHandler):
         self.redis.set(hash, str(result))
         svg = parser.getSVG()
         response = 200
+        self.send_response(response, "OK")
         #self.send_header('Content-type','application/json')
         self.send_header('Access-Control-Allow-Origin', '*')
         self.end_headers()
-        self.send_response(response)
         jsonResponse = json.dumps({"hash": hash, "svg": svg})
         self.wfile.write(bytes(jsonResponse, "utf-8"))
         #self.wfile.write(bytes(jsonResponse, "utf8"))
