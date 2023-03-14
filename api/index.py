@@ -1,9 +1,9 @@
 from http.server import BaseHTTPRequestHandler
 import json
-from .src.Parser import Parser
+from src.Parser import Parser
 import os
-from .src.handlerBase import handlerBase 
-from .src.util import randomHash
+from src.handlerBase import handlerBase 
+from src.util import randomHash
 #from .src.RedisDB import RedisDB
 import redis
 from dotenv import load_dotenv
@@ -13,25 +13,27 @@ load_dotenv()
 #redis_db = redis.Redis(host=os.getenv("REDIS_HOST"), port=os.getenv("REDIS_PORT"), db=os.getenv("REDIS_DB"), username=os.getenv("REDIS_USERNAME"), password=os.getenv("REDIS_PASSWORD"))
 
 class handler(handlerBase):
-    # def do_OPTIONS(self):
-    #     self.send_response(200, "ok")
-    #     self.send_header('Access-Control-Allow-Origin', '*')
-    #     self.send_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
-    #     self.send_header('Access-Control-Allow-Headers', 'Content-Type')
-    #     self.end_headers()
-    def do_GET(self):
-        # check if redis has a ConnectionPool attribute
+    def end_headers(self):
         self.send_header('Access-Control-Allow-Origin', '*')
-        if not hasattr(self, 'redis'):
-            self.redis = redis.Redis(host=os.getenv("REDIS_HOST"), port=os.getenv("REDIS_PORT"), db=os.getenv("REDIS_DB"), username=os.getenv("REDIS_USERNAME"), password=os.getenv("REDIS_PASSWORD"))
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type')
+        self.send_header('Access-Control-Allow-Credentials', 'true')
+        self.send_header('Access-Control-Max-Age', '86400')
+        self.send_header('Cache-Control', 'no-cache')
+        self.send_header('Access-Control-Expose-Headers', 'Content-Length, X-Requested-With, X-HTTP-Method-Override, Content-Type, Cache-Control, Accept')
+        BaseHTTPRequestHandler.end_headers(self)
+    def do_GET(self):
         response = 200
         self.send_response(response)
+        # check if redis has a ConnectionPool attribute
+        # self.send_header('Access-Control-Allow-Origin', '*')
+        if not hasattr(self, 'redis'):
+            self.redis = redis.Redis(host=os.getenv("REDIS_HOST"), port=os.getenv("REDIS_PORT"), db=os.getenv("REDIS_DB"), username=os.getenv("REDIS_USERNAME"), password=os.getenv("REDIS_PASSWORD"))
         self.send_header('Content-type','text/html')
-        self.end_headers()
         self.wfile.write(bytes("Hello World !", "utf8"))
         return
     def do_POST(self):
-        self.send_header('Access-Control-Allow-Origin', '*')
+        # self.send_header('Access-Control-Allow-Origin', '*')
         if not hasattr(self, 'redis'):
             self.redis = redis.Redis(host=os.getenv("REDIS_HOST"), port=os.getenv("REDIS_PORT"), db=os.getenv("REDIS_DB"), username=os.getenv("REDIS_USERNAME"), password=os.getenv("REDIS_PASSWORD"))
         s = self.path
@@ -59,10 +61,11 @@ class handler(handlerBase):
         self.send_response(response)
         self.send_header('Content-type','application/json')
         # self.send_header('Access-Control-Allow-Origin', '*')
-        self.end_headers()
+        #self.end_headers()
         jsonResponse = json.dumps({"hash": hash, "svg": svg})
         self.wfile.write(bytes(jsonResponse, "utf-8"))
         #self.wfile.write(bytes(jsonResponse, "utf8"))
+        print("done")
         return
 
 
