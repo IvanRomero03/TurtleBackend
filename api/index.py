@@ -5,12 +5,12 @@ import os
 from .src.handlerBase import handlerBase 
 from .src.util import randomHash
 from .src.RedisDB import RedisDB
-import redis
+#import redis
 from dotenv import load_dotenv
 
 load_dotenv()
 
-redis_db = redis.Redis(host=os.getenv("REDIS_HOST"), port=os.getenv("REDIS_PORT"), db=os.getenv("REDIS_DB"), username=os.getenv("REDIS_USERNAME"), password=os.getenv("REDIS_PASSWORD"))
+#redis_db = redis.Redis(host=os.getenv("REDIS_HOST"), port=os.getenv("REDIS_PORT"), db=os.getenv("REDIS_DB"), username=os.getenv("REDIS_USERNAME"), password=os.getenv("REDIS_PASSWORD"))
 
 class handler(handlerBase):
     def do_GET(self):
@@ -32,7 +32,8 @@ class handler(handlerBase):
         result = parser.parse(textInput)
         parser.execute()
         hash = randomHash(16)
-        redis_db.set(hash, str(result))
+        #redis_db.set(hash, str(result))
+        self.redis.set(hash, str(result))
         svg = parser.getSVG()
         response = 200
         self.send_response(response)
