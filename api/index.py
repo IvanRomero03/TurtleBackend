@@ -1,9 +1,9 @@
 from http.server import BaseHTTPRequestHandler
 import json
-from .src.Parser import Parser
+from src.Parser import Parser
 import os
-from .src.handlerBase import handlerBase 
-from .src.util import randomHash
+from src.handlerBase import handlerBase 
+from src.util import randomHash
 #from .src.RedisDB import RedisDB
 import redis
 from dotenv import load_dotenv
@@ -28,9 +28,19 @@ class handler(handlerBase):
             self.redis = redis.Redis(host=os.getenv("REDIS_HOST"), port=os.getenv("REDIS_PORT"), db=os.getenv("REDIS_DB"), username=os.getenv("REDIS_USERNAME"), password=os.getenv("REDIS_PASSWORD"))
         s = self.path
         text = self.rfile.read(int(self.headers['Content-Length'])).decode("utf-8")
-        text = json.loads(text)
+        text: dict = json.loads(text)
         textInput = text["text"]
+        # if has ["hash"] then get from redis and load query
         parser = Parser()
+        if "hash" in text.keys():
+            print(text["hash"])
+            hashInput = self.redis.get(text["hash"]).decode("utf-8")
+            print(hashInput)
+            # get from redis
+            query = json.loads(hashInput.replace("'", '"'))
+            print("query", query)
+            for i in query:
+                parser.parse(i)
         result = parser.parse(textInput)
         parser.execute()
         hash = randomHash(16)
@@ -42,7 +52,8 @@ class handler(handlerBase):
         self.send_header('Content-type','application/json')
         self.end_headers()
         jsonResponse = json.dumps({"hash": hash, "svg": svg})
-        self.wfile.write(bytes(jsonResponse, "utf8"))
+        self.wfile.write(bytes(jsonResponse, "utf-8"))
+        #self.wfile.write(bytes(jsonResponse, "utf8"))
         return
 
 
