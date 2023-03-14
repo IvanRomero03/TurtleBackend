@@ -2,7 +2,7 @@ import redis
 import json
 
 class RedisDB:
-    def __init__(self, host, port, db, username, password) -> None:
+    def __init__(self, host, port, db, username, password):
         self.host = host
         self.port = port
         self.db = db
