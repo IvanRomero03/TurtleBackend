@@ -1,8 +1,8 @@
 from http.server import BaseHTTPRequestHandler
 import json
-from Parser import Parser
+from .Parser import Parser
 import os
-from RedisDB import RedisDB
+from .RedisDB import RedisDB
 from dotenv import load_dotenv
 
 load_dotenv()
