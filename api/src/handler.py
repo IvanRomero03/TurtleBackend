@@ -5,10 +5,11 @@ import os
 from .RedisDB import RedisDB
 from dotenv import load_dotenv
 
+#load_dotenv()
+
 # Singleton implementation for handler class
 class handler(BaseHTTPRequestHandler):
-    def __new__(cls, *args) -> BaseHTTPRequestHandler:
-        load_dotenv()
+    def __new__(cls, *args):
         print("new", cls)
         print("new", args)
         if not hasattr(cls, 'instance'):
