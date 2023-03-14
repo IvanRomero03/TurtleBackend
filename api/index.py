@@ -2,11 +2,11 @@ from http.server import BaseHTTPRequestHandler
 #from urllib import parse
 import json
 from .src.Parser import Parser
-from .src.handler import handler as SingletonHandler
+from .src.handler import handlerBase 
 from .src.util import randomHash
 #from RedisDB import RedisDB
 
-class handler(SingletonHandler):
+class handler(handlerBase):
     def do_POST(self):
         s = self.path
         # Content-Type: application/json
