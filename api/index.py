@@ -24,7 +24,8 @@ class handler(BaseHTTPRequestHandler):
         parser.execute()
         print(os.getcwd())
         #create empty file
-        open("/temp/temp.svg", "w").close()
+        #open("/temp/temp.svg", "w").close()
+        os.startfile("/temp/temp.svg")
         parser.save("/temp/temp.svg")
 
         response = 200
