@@ -2,7 +2,7 @@ from http.server import BaseHTTPRequestHandler
 import json
 from .src.Parser import Parser
 import os
-from .src.handler import handlerBase 
+from .src.handlerBase import handlerBase 
 from .src.util import randomHash
 #from .src.RedisDB import RedisDB
 
