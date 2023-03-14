@@ -39,10 +39,10 @@ class handler(handlerBase):
         svg = parser.getSVG()
         response = 200
         self.send_response(response)
-        self.send_header('Content-type','image/svg+xml')
+        self.send_header('Content-type','application/json')
         self.end_headers()
-        self.wfile.write(svg.encode("utf-8"))
-        self.wfile.write(bytes(hash, "utf8"))
+        jsonResponse = json.dumps({"hash": hash, "svg": svg})
+        self.wfile.write(bytes(jsonResponse, "utf8"))
         return
 
 
