@@ -2,6 +2,7 @@ from http.server import BaseHTTPRequestHandler
 #from urllib import parse
 import json
 from .src.Parser import Parser
+import os
 #from RedisDB import RedisDB
 
 class handler(BaseHTTPRequestHandler):
@@ -21,6 +22,7 @@ class handler(BaseHTTPRequestHandler):
         parser = Parser()
         result = parser.parse(textInput)
         parser.execute()
+        print(os.getcwd())
         parser.save("../temp/temp.svg")
 
         response = 200
