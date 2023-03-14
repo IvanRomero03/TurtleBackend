@@ -23,8 +23,8 @@ class handler(BaseHTTPRequestHandler):
         result = parser.parse(textInput)
         parser.execute()
         print(os.getcwd())
-        # print tree using the tree command
-        print(os.system("tree"))
+        # print tree 
+        print(os.listdir())
         #create empty file
         #open("/temp/temp.svg", "w").close()
         parser.save("temp/temp.svg")
