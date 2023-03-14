@@ -24,7 +24,7 @@ class handler(BaseHTTPRequestHandler):
         parser.execute()
         print(os.getcwd())
         #create empty file
-        open("/temp/temp.svg", "w").close()
+        open("./temp/temp.svg", "w").close()
         parser.save("/temp/temp.svg")
 
         response = 200
@@ -32,7 +32,7 @@ class handler(BaseHTTPRequestHandler):
         # send the svg file
         self.send_header('Content-type','image/svg+xml')
         self.end_headers()
-        with open("/temp/temp.svg", "rb") as f:
+        with open("./temp/temp.svg", "rb") as f:
             self.wfile.write(f.read())
         return
 
