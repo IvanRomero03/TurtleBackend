@@ -1,9 +1,9 @@
 from http.server import BaseHTTPRequestHandler
 import json
-from src.Parser import Parser
+from .src.Parser import Parser
 import os
-from src.handlerBase import handlerBase 
-from src.util import randomHash
+from .src.handlerBase import handlerBase 
+from .src.util import randomHash
 #from .src.RedisDB import RedisDB
 import redis
 from dotenv import load_dotenv
