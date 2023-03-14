@@ -4,7 +4,7 @@ from .src.Parser import Parser
 import os
 from .src.handler import handlerBase 
 from .src.util import randomHash
-from .src.RedisDB import RedisDB
+#from .src.RedisDB import RedisDB
 
 # class handler(handlerBase):
 #     def do_GET(self):
