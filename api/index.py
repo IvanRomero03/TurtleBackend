@@ -2,9 +2,9 @@ from http.server import BaseHTTPRequestHandler
 import json
 from .src.Parser import Parser
 import os
-#from .src.handler import handlerBase 
-#from .src.util import randomHash
-#from .src.RedisDB import RedisDB
+from .src.handler import handlerBase 
+from .src.util import randomHash
+from .src.RedisDB import RedisDB
 
 # class handler(handlerBase):
 #     def do_GET(self):

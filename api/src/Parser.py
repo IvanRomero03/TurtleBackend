@@ -67,11 +67,11 @@ class Parser:
         return self.turtle.to_svg()
 
 
-if __name__ == "__main__":
-    parser = Parser()
-    parser.parse("go 100 gd 90 go 100 gd 90 go 100")
-    parser.execute()
-    parser.save("temp10.svg")
+# if __name__ == "__main__":
+#     parser = Parser()
+#     parser.parse("go 100 gd 90 go 100 gd 90 go 100")
+#     parser.execute()
+#     parser.save("temp10.svg")
 
 
 

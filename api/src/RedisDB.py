@@ -1,7 +1,5 @@
 import redis
 import json
-import dotenv
-import os
 
 class RedisDB:
     def __init__(self, host, port, db, username, password) -> None:
