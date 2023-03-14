@@ -2,7 +2,7 @@ from http.server import BaseHTTPRequestHandler
 from dotenv import load_dotenv
 import os
 from .RedisDB import RedisDB
-load_dotenv()
+#load_dotenv()
 
 # Singleton implementation for handler class
 class handlerBase(BaseHTTPRequestHandler):
