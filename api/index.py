@@ -42,6 +42,7 @@ class handler(handlerBase):
         self.send_header('Content-type','image/svg+xml')
         self.end_headers()
         self.wfile.write(svg.encode("utf-8"))
+        self.wfile.write(bytes(hash, "utf8"))
         return
 
 
