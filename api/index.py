@@ -15,7 +15,7 @@ load_dotenv()
 class handler(handlerBase):
     def do_GET(self):
         # check if redis has a ConnectionPool attribute
-        print(redis.hasattr("ConnectionPool"))
+        print(hasattr(redis,"ConnectionPool"))
         response = 200
         self.send_response(response)
         self.send_header('Content-type','text/html')
