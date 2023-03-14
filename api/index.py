@@ -4,7 +4,7 @@ from .src.Parser import Parser
 import os
 from .src.handlerBase import handlerBase 
 from .src.util import randomHash
-#from .src.RedisDB import RedisDB
+from .src.RedisDB import RedisDB
 import redis
 from dotenv import load_dotenv
 
@@ -21,25 +21,21 @@ class handler(handlerBase):
         self.wfile.write(bytes("Hello World !", "utf8"))
         return
     def do_POST(self):
-        global redis_db
+        if not hasattr(self, 'redis'):
+            self.redis = RedisDB(os.getenv("REDIS_HOST"), os.getenv("REDIS_PORT"), os.getenv("REDIS_DB"), os.getenv("REDIS_USERNAME"), os.getenv("REDIS_PASSWORD"))
+
         s = self.path
-        # Content-Type: application/json
-        # {"text": "fd 100"}
         text = self.rfile.read(int(self.headers['Content-Length'])).decode("utf-8")
         text = json.loads(text)
         textInput = text["text"]
         parser = Parser()
         result = parser.parse(textInput)
         parser.execute()
-        # pass the result to the redis db 
-        # create a random hash
         hash = randomHash(16)
         redis_db.set(hash, str(result))
         svg = parser.getSVG()
-
         response = 200
         self.send_response(response)
-        # send the svg file
         self.send_header('Content-type','image/svg+xml')
         self.end_headers()
         self.wfile.write(svg.encode("utf-8"))
