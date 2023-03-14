@@ -62,6 +62,9 @@ class Parser:
         
     def save(self, filename: str):
         self.turtle.save_as(filename)
+    
+    def getSVG(self):
+        return self.turtle.to_svg()
 
 
 if __name__ == "__main__":
