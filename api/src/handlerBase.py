@@ -4,9 +4,10 @@ import os
 # from .RedisDB import RedisDB
 #load_dotenv()
 
-import redis
-import json
+
 try:
+    import redis
+    import json
     class RedisDB:
         def __init__(self, host, port, db, username, password):
             self.host = host
