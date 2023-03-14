@@ -4,7 +4,6 @@ import json
 from .src.Parser import Parser
 from .src.handler import handler as SingletonHandler
 from .src.util import randomHash
-import os
 #from RedisDB import RedisDB
 
 class handler(SingletonHandler):
