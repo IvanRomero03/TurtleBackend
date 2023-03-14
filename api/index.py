@@ -21,8 +21,8 @@ class handler(handlerBase):
         self.wfile.write(bytes("Hello World !", "utf8"))
         return
     def do_POST(self):
-        if not hasattr(self, 'redis'):
-            self.redis = RedisDB(os.getenv("REDIS_HOST"), os.getenv("REDIS_PORT"), os.getenv("REDIS_DB"), os.getenv("REDIS_USERNAME"), os.getenv("REDIS_PASSWORD"))
+        # if not hasattr(self, 'redis'):
+        #     self.redis = RedisDB(os.getenv("REDIS_HOST"), os.getenv("REDIS_PORT"), os.getenv("REDIS_DB"), os.getenv("REDIS_USERNAME"), os.getenv("REDIS_PASSWORD"))
 
         s = self.path
         text = self.rfile.read(int(self.headers['Content-Length'])).decode("utf-8")
