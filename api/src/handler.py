@@ -2,7 +2,7 @@ from http.server import BaseHTTPRequestHandler
 import json
 from src.Parser import Parser
 import os
-from .src.RedisDB import RedisDB
+from RedisDB import RedisDB
 from dotenv import load_dotenv
 
 load_dotenv()
