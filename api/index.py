@@ -13,15 +13,15 @@ load_dotenv()
 #redis_db = redis.Redis(host=os.getenv("REDIS_HOST"), port=os.getenv("REDIS_PORT"), db=os.getenv("REDIS_DB"), username=os.getenv("REDIS_USERNAME"), password=os.getenv("REDIS_PASSWORD"))
 
 class handler(handlerBase):
-    def end_headers(self):
+    def do_OPTIONS(self):
+        self.send_response(200, "ok")
         self.send_header('Access-Control-Allow-Origin', '*')
-        self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
-        self.send_header('Access-Control-Allow-Headers', 'Content-Type')
-        self.send_header('Access-Control-Allow-Credentials', 'true')
-        self.send_header('Access-Control-Max-Age', '86400')
-        self.send_header('Cache-Control', 'no-cache')
-        self.send_header('Access-Control-Expose-Headers', 'Content-Length, X-Requested-With, X-HTTP-Method-Override, Content-Type, Cache-Control, Accept')
-        BaseHTTPRequestHandler.end_headers(self)
+        #self.send_header('Access-Control-Allow-Headers', '*')
+        self.send_header('Access-Control-Allow-Methods','GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS')
+        print(self.headers)
+        print("OPTIONS2")
+        self.end_headers()
+        return
     def do_GET(self):
         response = 200
         self.send_response(response)
