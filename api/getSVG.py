@@ -12,7 +12,7 @@ load_dotenv()
 
 class handler(BaseHTTPRequestHandler):
     def do_OPTIONS(self):
-        self.send_response(200)
+        self.send_response(200, "ok")
         self.send_header('Access-Control-Allow-Origin', '*')
         #self.send_header('Access-Control-Allow-Headers', '*')
         self.send_header('Access-Control-Allow-Methods','GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS')
@@ -22,6 +22,8 @@ class handler(BaseHTTPRequestHandler):
         return
     def do_POST(self):
         #self.send_header('Access-Control-Allow-Origin', '*')
+        response = 200
+        self.send_response(response, "OK")
         if not hasattr(self, 'redis'):
             self.redis = redis.Redis(host=os.getenv("REDIS_HOST"), port=os.getenv("REDIS_PORT"), db=os.getenv("REDIS_DB"), username=os.getenv("REDIS_USERNAME"), password=os.getenv("REDIS_PASSWORD"))
         s = self.path
@@ -46,10 +48,10 @@ class handler(BaseHTTPRequestHandler):
         #redis_db.set(hash, str(result))
         self.redis.set(hash, str(result))
         svg = parser.getSVG()
-        response = 200
-        self.send_response(response, "OK")
+        
         #self.send_header('Content-type','application/json')
         self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods','GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS')
         self.end_headers()
         jsonResponse = json.dumps({"hash": hash, "svg": svg})
         self.wfile.write(bytes(jsonResponse, "utf-8"))
