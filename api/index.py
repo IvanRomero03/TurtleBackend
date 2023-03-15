@@ -56,7 +56,7 @@ class handler(handlerBase):
         # self.send_response(response, "OK")
         self.send_header('Access-Control-Allow-Headers', '*')
         self.send_header('Access-Control-Allow-Origin', '*')
-        self.send_header('Access-Control-Allow-Methods','GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS')
+        self.send_header('Access-Control-Allow-Methods',"'GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'")
         
 
         self.end_headers()
