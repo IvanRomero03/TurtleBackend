@@ -11,16 +11,16 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class handler(BaseHTTPRequestHandler):
-    def do_OPTIONS(self):
-        self.send_response(200, "ok")
-        #self.send_header('Content-type','application/json')
-        self.send_header('Access-Control-Allow-Origin', '*')
-        self.send_header('Access-Control-Allow-Headers', '*')
-        self.send_header('Access-Control-Allow-Methods',"'GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'")
-        print(self.headers)
-        print("OPTIONS")
-        self.end_headers()
-        return
+    # def do_OPTIONS(self):
+    #     self.send_response(200, "ok")
+    #     #self.send_header('Content-type','application/json')
+    #     self.send_header('Access-Control-Allow-Origin', '*')
+    #     self.send_header('Access-Control-Allow-Headers', '*')
+    #     self.send_header('Access-Control-Allow-Methods',"'GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'")
+    #     print(self.headers)
+    #     print("OPTIONS")
+    #     self.end_headers()
+    #     return
     def do_POST(self):
         #self.send_header('Access-Control-Allow-Origin', '*')
         response = 200
@@ -51,7 +51,7 @@ class handler(BaseHTTPRequestHandler):
         svg = parser.getSVG()
         
         # self.send_header('Content-type','application/json')
-        self.send_response(response, "OK")
+        # self.send_response(response, "OK")
         self.send_header('Access-Control-Allow-Headers', '*')
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Access-Control-Allow-Methods','GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS')
