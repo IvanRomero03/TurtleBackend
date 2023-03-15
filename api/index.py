@@ -15,7 +15,7 @@ load_dotenv()
 class handler(handlerBase):
     def do_OPTIONS(self):
         self.send_response(200, "ok")
-        self.send_header('Content-type','application/json')
+        #self.send_header('Content-type','application/json')
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Access-Control-Allow-Headers', '*')
         self.send_header('Access-Control-Allow-Methods',"'GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'")
@@ -60,7 +60,7 @@ class handler(handlerBase):
         svg = parser.getSVG()
         response = 200
         
-        self.send_header('Content-type','application/json')
+        #self.send_header('Content-type','application/json')
         # self.send_header('Access-Control-Allow-Origin', '*')
         #self.end_headers()
         self.end_headers()
