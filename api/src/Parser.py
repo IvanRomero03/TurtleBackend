@@ -1,5 +1,5 @@
 from svg_turtle import SvgTurtle
-from Desensos import index, Base
+from .Desensos import index, Base
 
 lexema_nArgs = {
     "go": 1, # avanzar
