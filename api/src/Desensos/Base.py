@@ -1,7 +1,7 @@
 class DescensoRecursivoBase:
-    def __init__(self, s: str):
+    def __init__(self, s: str, i: int = 0):
         self.s = s
-        self.i = 0
+        self.i = i
         self.n = len(s)
     
     def getToken(self) -> str:
@@ -11,6 +11,9 @@ class DescensoRecursivoBase:
             return token
         else:
             return None
+    
+    def copy(self):
+        return DescensoRecursivoBase(self.s, self.i)
 
 
 

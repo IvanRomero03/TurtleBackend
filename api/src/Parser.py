@@ -9,6 +9,7 @@ lexema_nArgs = {
     "pb": 0, # pluma abajo
     "lp": 0, # limpiar pantalla
     "cc": 1, # Cambiar color
+    "rp": "n", # Repetir
 }
 
 class Parser:
@@ -44,15 +45,26 @@ class Parser:
         while splittedText:
             print(splittedText)
             lexema = splittedText.pop(0)
-            if lexema in lexema_nArgs:
-                for i in range(lexema_nArgs[lexema]):
-                    currentCommandArgs.append(splittedText.pop(0))
-                self.queryArgToCommand(lexema, currentCommandArgs)
-                stringQuery.append(lexema + " " + " ".join(currentCommandArgs))
-                currentCommandArgs = []
+            if lexema == "rp":
+                # rp 4 [go 100 gd 90 go 100 gd 90 go 100]
+                n = int(splittedText.pop(0))
+                first = splittedText.pop(0) # [
+                splittedText.insert(0, first[1:])
+                last = splittedText.pop(-1) # ]
+                splittedText.append(last[:-1])
+                unsplittedText = " ".join(splittedText)
+                for i in range(n):
+                    self.parse(unsplittedText)
             else:
-                print("Error: Lexema no reconocido")
-                break
+                if lexema in lexema_nArgs:
+                    for i in range(lexema_nArgs[lexema]):
+                        currentCommandArgs.append(splittedText.pop(0))
+                    self.queryArgToCommand(lexema, currentCommandArgs)
+                    stringQuery.append(lexema + " " + " ".join(currentCommandArgs))
+                    currentCommandArgs = []
+                else:
+                    print("Error: Lexema no reconocido")
+                    break
         return stringQuery
                 
     def execute(self):
