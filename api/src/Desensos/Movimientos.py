@@ -1,5 +1,5 @@
-from Base import DescensoRecursivoBase
-from Util import numero, separador
+from .Base import DescensoRecursivoBase
+from .Util import numero, separador
 
 # <go> ::= "go " <numero>
 def avanzar(base: DescensoRecursivoBase) -> tuple[bool, DescensoRecursivoBase]:

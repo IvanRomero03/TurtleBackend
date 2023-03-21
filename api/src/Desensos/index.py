@@ -1,7 +1,7 @@
-from Base import DescensoRecursivoBase
-from Movimientos import movimiento
-from Pluma import pluma
-from Util import numero, palabra, separador
+from .Base import DescensoRecursivoBase
+from .Movimientos import movimiento
+from .Pluma import pluma
+from .Util import numero, palabra, separador
 
 # <com> ::= <mov> | <plum>
 def comando(base: DescensoRecursivoBase) -> tuple[bool, DescensoRecursivoBase]:
@@ -108,7 +108,7 @@ def valid_input(base: DescensoRecursivoBase) -> tuple[bool, DescensoRecursivoBas
         token = cop.getToken()
         print(token)
         if token == "" or token == None:
-            return True
+            return True, base1
         base2 = base1.copy()
         res, temp = comando(base1)
         if res:

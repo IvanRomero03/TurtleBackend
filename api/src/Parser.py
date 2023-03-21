@@ -1,4 +1,5 @@
 from svg_turtle import SvgTurtle
+from Desensos import index, Base
 
 lexema_nArgs = {
     "go": 1, # avanzar
@@ -78,10 +79,17 @@ class Parser:
     def getSVG(self):
         return self.turtle.to_svg()
 
+    def verifyInput(self, text: str):
+        res, base = index.valid_input(Base.DescensoRecursivoBase(text))
+        print(base.s)
+        print(base.i)
+        return res
+
 
 # if __name__ == "__main__":
 #     parser = Parser()
-#     parser.parse("go 100 gd 90 go 100 gd 90 go 100")
+#     print(parser.verifyInput("cc red rp 4 [go 100 gd 90]"))
+#     parser.parse("cc red rp 4 [go 100 gd 90]")
 #     parser.execute()
 #     parser.save("temp10.svg")
 

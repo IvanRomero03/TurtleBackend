@@ -34,35 +34,43 @@ class handler(handlerBase):
         print(text)
         text: dict = json.loads(text)
         textInput = text["text"]
-        # if has ["hash"] then get from redis and load query
+        # if texInput is a valid input
         parser = Parser()
-        if "hash" in text.keys():
-            print(text["hash"])
-            hashInput = self.redis.get(text["hash"]).decode("utf-8")
-            print(hashInput)
-            # get from redis
-            query = json.loads(hashInput.replace("'", '"'))
-            print("query", query)
-            for i in query:
-                parser.parse(i)
-        result = parser.parse(textInput)
-        parser.execute()
-        hash = randomHash(16)
-        #redis_db.set(hash, str(result))
-        self.redis.set(hash, str(result))
-        svg = parser.getSVG()
-        
-        # self.send_header('Content-type','application/json')
-        # self.send_response(response, "OK")
-        self.send_header('Access-Control-Allow-Headers', '*')
-        self.send_header('Access-Control-Allow-Origin', '*')
-        self.send_header('Access-Control-Allow-Methods',"'GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'")
-        
+        if parser.verifyInput(textInput):
+            if "hash" in text.keys():
+                print(text["hash"])
+                hashInput = self.redis.get(text["hash"]).decode("utf-8")
+                print(hashInput)
+                # get from redis
+                query = json.loads(hashInput.replace("'", '"'))
+                print("query", query)
+                for i in query:
+                    parser.parse(i)
+            result = parser.parse(textInput)
+            parser.execute()
+            hash = randomHash(16)
+            #redis_db.set(hash, str(result))
+            self.redis.set(hash, str(result))
+            svg = parser.getSVG()
+            
+            # self.send_header('Content-type','application/json')
+            # self.send_response(response, "OK")
+            self.send_header('Access-Control-Allow-Headers', '*')
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.send_header('Access-Control-Allow-Methods',"'GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'")
+            
 
-        self.end_headers()
-        jsonResponse = json.dumps({"hash": hash, "svg": svg})
-        self.wfile.write(bytes(jsonResponse, "utf-8"))
+            self.end_headers()
+            jsonResponse = json.dumps({"hash": hash, "svg": svg, "verified": True})
+            self.wfile.write(bytes(jsonResponse, "utf-8"))
         #self.wfile.write(bytes(jsonResponse, "utf8"))
+        else:
+            self.send_header('Access-Control-Allow-Headers', '*')
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.send_header('Access-Control-Allow-Methods',"'GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'")
+            self.end_headers()
+            jsonResponse = json.dumps({"verified": False})
+            self.wfile.write(bytes(jsonResponse, "utf-8"))
         return
     # def do_GET(self):
     #     response = 200

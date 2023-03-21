@@ -1,4 +1,4 @@
-from Base import DescensoRecursivoBase
+from .Base import DescensoRecursivoBase
 
 # <digito> ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
 def digito(base: DescensoRecursivoBase) -> tuple[bool, DescensoRecursivoBase]:

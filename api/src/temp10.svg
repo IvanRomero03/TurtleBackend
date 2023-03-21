@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<svg baseProfile="full" height="250px" version="1.1" width="400px" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><clipPath id="border_clip"><rect height="250" width="400" x="0" y="0" /></clipPath></defs><polyline clip-path="url(#border_clip)" fill="none" points="200.5,125.5 300.5,125.5 300.5,225.5 200.5,225.5 200.49999999999997,125.50000000000001 300.5,125.49999999999999" stroke="#ff0000" stroke-linecap="round" stroke-width="1" /></svg>

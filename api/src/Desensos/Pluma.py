@@ -1,4 +1,4 @@
-from Base import DescensoRecursivoBase
+from .Base import DescensoRecursivoBase
 
 # <pa> ::= “pa”
 def plumaArriba(base: DescensoRecursivoBase) -> tuple[bool, DescensoRecursivoBase]:
